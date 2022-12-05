@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Contacts extends React.Component {
   static propTypes = {
-    contacts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        name: PropTypes.string,
-        number: PropTypes.string,
-      })
-    ),
+    contacts: PropTypes.array,
   };
   state = {
     filter: '',

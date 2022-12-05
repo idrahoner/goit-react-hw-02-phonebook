@@ -54,5 +54,5 @@ export default class PhonebookForm extends React.Component {
 }
 
 PhonebookForm.propTypes = {
-  onSubmit: PropTypes.elementType,
+  onSubmit: PropTypes.func,
 };

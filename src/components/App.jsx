@@ -5,7 +5,7 @@ import Contacts from 'components/Contacts';
 
 export class App extends React.Component {
   state = {
-    contacts: [],
+    contacts: [...this.props.initialValue],
   };
 
   addContact = profile => {
