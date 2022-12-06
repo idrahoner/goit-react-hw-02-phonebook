@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { App } from 'components/App';
 import './index.css';
 
-import defaultContacts from 'data/defaultContacts';
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App initialValue={defaultContacts} />
+    <App />
   </React.StrictMode>
 );

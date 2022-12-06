@@ -8,7 +8,7 @@ import { checkEqual } from 'utils';
 
 export class App extends React.Component {
   state = {
-    contacts: [...this.props.initialValue],
+    contacts: [],
     filter: '',
   };
 
@@ -34,7 +34,6 @@ export class App extends React.Component {
 
   deleteContact = event => {
     const contactId = event.currentTarget.id;
-    console.log(contactId);
     this.setState(pervState => ({
       contacts: pervState.contacts.filter(element => element.id !== contactId),
     }));
