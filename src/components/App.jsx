@@ -3,12 +3,28 @@ import Section from 'components/Section';
 import PhonebookForm from 'components/PhonebookForm';
 import Contacts from 'components/Contacts';
 
+import { checkEqual } from 'utils';
+
 export class App extends React.Component {
   state = {
     contacts: [...this.props.initialValue],
   };
 
   addContact = profile => {
+    const { contacts } = this.state;
+    const isAlreadyHave = contacts.reduce(
+      (acc, { name, number }) =>
+        acc === ''
+          ? (acc = checkEqual(name, profile.name)) ||
+            (acc = checkEqual(number, profile.number))
+          : acc,
+      ''
+    );
+
+    if (isAlreadyHave) {
+      return alert(isAlreadyHave + ' is already in contacts.');
+    }
+
     this.setState(pervState => ({
       contacts: [...pervState.contacts, profile],
     }));
@@ -23,9 +39,6 @@ export class App extends React.Component {
   };
 
   render() {
-    // console.log(this.state);
-    // console.log(this.state.contacts);
-
     const { contacts } = this.state;
     return (
       <div>
