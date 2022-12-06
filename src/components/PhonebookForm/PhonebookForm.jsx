@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import css from './PhonebookForm.module.css';
 
 export default class PhonebookForm extends React.Component {
   state = {
@@ -22,10 +23,11 @@ export default class PhonebookForm extends React.Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form onSubmit={this.handleSubmit} className={css.phonebookForm}>
+        <label className={css.formInput}>
           Name
           <input
+            className={css.formField}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -35,9 +37,10 @@ export default class PhonebookForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <label>
+        <label className={css.formInput}>
           Phone
           <input
+            className={css.formField}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -47,7 +50,9 @@ export default class PhonebookForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className={css.submitButton} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

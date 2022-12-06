@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import css from './ContactList.module.css';
 
 export default class Contacts extends React.Component {
   static propTypes = {
@@ -34,13 +35,18 @@ export default class Contacts extends React.Component {
   render() {
     const { onDelete } = this.props;
     return (
-      <ul>
+      <ul className={css.contactList}>
         {this.filterContacts().map(({ id, name, number }) => (
-          <li key={id}>
-            <p>
+          <li key={id} className={css.contactItem}>
+            <p className={css.contactText}>
               {name}: {number}
             </p>
-            <button type="button" onClick={onDelete} id={id}>
+            <button
+              className={css.deleteButton}
+              type="button"
+              onClick={onDelete}
+              id={id}
+            >
               Delete
             </button>
           </li>
