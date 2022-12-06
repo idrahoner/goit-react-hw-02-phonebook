@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Contacts extends React.Component {
   static propTypes = {
     contacts: PropTypes.array,
+    onDelete: PropTypes.func,
   };
   state = {
     filter: '',
@@ -32,6 +33,7 @@ export default class Contacts extends React.Component {
 
   render() {
     const { filter } = this.state;
+    const { onDelete } = this.props;
     return (
       <>
         <input
@@ -46,6 +48,9 @@ export default class Contacts extends React.Component {
               <p>
                 {name}: {number}
               </p>
+              <button type="button" onClick={onDelete} id={id}>
+                Delete
+              </button>
             </li>
           ))}
         </ul>

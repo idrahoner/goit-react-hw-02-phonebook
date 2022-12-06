@@ -14,6 +14,14 @@ export class App extends React.Component {
     }));
   };
 
+  deleteContact = event => {
+    const contactId = event.currentTarget.id;
+    console.log(contactId);
+    this.setState(pervState => ({
+      contacts: pervState.contacts.filter(element => element.id !== contactId),
+    }));
+  };
+
   render() {
     // console.log(this.state);
     // console.log(this.state.contacts);
@@ -25,7 +33,7 @@ export class App extends React.Component {
           <PhonebookForm onSubmit={this.addContact} />
         </Section>
         <Section title="Contacts">
-          <Contacts contacts={contacts} />
+          <Contacts contacts={contacts} onDelete={this.deleteContact} />
         </Section>
       </div>
     );
