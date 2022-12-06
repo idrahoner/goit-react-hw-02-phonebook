@@ -1,13 +1,15 @@
 import React from 'react';
 import Section from 'components/Section';
 import PhonebookForm from 'components/PhonebookForm';
-import Contacts from 'components/Contacts';
+import Filter from 'components/Filter';
+import ContactList from 'components/ContactList';
 
 import { checkEqual } from 'utils';
 
 export class App extends React.Component {
   state = {
     contacts: [...this.props.initialValue],
+    filter: '',
   };
 
   addContact = profile => {
@@ -38,15 +40,39 @@ export class App extends React.Component {
     }));
   };
 
+  handleChange = event => {
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
+  };
+
+  filterContacts = () => {
+    const { contacts, filter } = this.state;
+
+    const query = filter.trim().toLowerCase();
+
+    if (!query) {
+      return contacts;
+    }
+
+    return contacts.filter(
+      ({ name, number }) =>
+        name.toLowerCase().includes(query) || number.includes(query)
+    );
+  };
+
   render() {
-    const { contacts } = this.state;
+    const { filter } = this.state;
     return (
       <div>
         <Section title="Phonebook">
           <PhonebookForm onSubmit={this.addContact} />
         </Section>
         <Section title="Contacts">
-          <Contacts contacts={contacts} onDelete={this.deleteContact} />
+          <Filter value={filter} onChange={this.handleChange} />
+          <ContactList
+            contacts={this.filterContacts()}
+            onDelete={this.deleteContact}
+          />
         </Section>
       </div>
     );

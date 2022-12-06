@@ -32,29 +32,20 @@ export default class Contacts extends React.Component {
   };
 
   render() {
-    const { filter } = this.state;
     const { onDelete } = this.props;
     return (
-      <>
-        <input
-          type="text"
-          name="filter"
-          value={filter}
-          onChange={this.handleChange}
-        />
-        <ul>
-          {this.filterContacts().map(({ id, name, number }) => (
-            <li key={id}>
-              <p>
-                {name}: {number}
-              </p>
-              <button type="button" onClick={onDelete} id={id}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      </>
+      <ul>
+        {this.filterContacts().map(({ id, name, number }) => (
+          <li key={id}>
+            <p>
+              {name}: {number}
+            </p>
+            <button type="button" onClick={onDelete} id={id}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     );
   }
 }
