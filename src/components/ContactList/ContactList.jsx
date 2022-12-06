@@ -1,57 +1,28 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import ContactItem from 'components/ContactItem';
 import css from './ContactList.module.css';
 
-export default class Contacts extends React.Component {
-  static propTypes = {
-    contacts: PropTypes.array,
-    onDelete: PropTypes.func,
-  };
-  state = {
-    filter: '',
-  };
-
-  handleChange = event => {
-    const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
-  };
-
-  filterContacts = () => {
-    const { contacts } = this.props;
-    const { filter } = this.state;
-
-    const query = filter.trim().toLowerCase();
-
-    if (!query) {
-      return this.props.contacts;
-    }
-
-    return contacts.filter(
-      ({ name, number }) =>
-        name.toLowerCase().includes(query) || number.includes(query)
-    );
-  };
-
-  render() {
-    const { onDelete } = this.props;
-    return (
-      <ul className={css.contactList}>
-        {this.filterContacts().map(({ id, name, number }) => (
-          <li key={id} className={css.contactItem}>
-            <p className={css.contactText}>
-              {name}: {number}
-            </p>
-            <button
-              className={css.deleteButton}
-              type="button"
-              onClick={onDelete}
-              id={id}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    );
-  }
+export default function ContactList({ contacts, onDelete }) {
+  return (
+    <ul className={css.contactList}>
+      {contacts.map(({ id, name, number }) => (
+        <ContactItem
+          key={id}
+          id={id}
+          name={name}
+          number={number}
+          onDelete={onDelete}
+        />
+      ))}
+    </ul>
+  );
 }
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
+  onDelete: PropTypes.func,
+};
